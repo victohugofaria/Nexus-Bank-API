@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: nexus-bank-db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: nexusbank
+    ports:
+      - "5432:5432"
+    volumes:
+      - nexus_data:/var/lib/postgresql/data
+
+volumes:
+  nexus_data:
