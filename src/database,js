@@ -1,0 +1,7 @@
+// Arquivo responsável por exportar a instância única do Prisma Client
+
+const { PrismaClient } = require("@prisma/client");
+
+const prisma = new PrismaClient();
+
+module.exports = prisma;
