@@ -4,9 +4,9 @@
   "description": "API para gerenciamento bancário com autenticação JWT e Docker.",
   "main": "index.js",
   "scripts": {
-  "dev": "nodemon src/app.js",
-  "start": "node src/app.js"
-},
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/victohugofaria/Nexus-Bank-API.git"
@@ -20,14 +20,18 @@
   },
   "homepage": "https://github.com/victohugofaria/Nexus-Bank-API#readme",
   "dependencies": {
-    "@prisma/client": "^7.7.0",
+    "@prisma/client": "^5.22.0",
     "bcrypt": "^6.0.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "prisma": "^7.7.0"
+    "pg": "^8.20.0",
+    "prisma": "^5.22.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@types/pg": "^8.20.0",
     "nodemon": "^3.1.14"
   }
 }

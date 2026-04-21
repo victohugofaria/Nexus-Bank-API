@@ -2,17 +2,17 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:15
-    container_name: nexus-bank-db
-    restart: always
+    image: postgres:15                  # Imagem oficial do PostgreSQL versão 15
+    container_name: nexus-bank-db       # Nome do container
+    restart: always                     # Reinicia automaticamente se cair
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: nexusbank
+      POSTGRES_USER: admin              # Usuário do banco
+      POSTGRES_PASSWORD: admin123       # Senha do banco
+      POSTGRES_DB: nexusbank            # Nome do banco de dados
     ports:
-      - "5432:5432"
+      - "5432:5432"                     # Mapeia a porta do container para a máquina local
     volumes:
-      - nexus_data:/var/lib/postgresql/data
+      - nexus_data:/var/lib/postgresql/data  # Persiste os dados mesmo se o container for removido
 
 volumes:
-  nexus_data:
+  nexus_data:                           # Volume nomeado para persistência dos dados
