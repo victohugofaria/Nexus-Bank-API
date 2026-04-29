@@ -3,15 +3,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// Configuração do banco de dados, usa PostgreSQL com a URL do .env
+// Configuração do banco de dados, usa PostgreSQL com a URL do arquivo .env
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// Entidade Usuario — representa os clientes e administradores do banco
+// Entidade Usuario, representa os clientes e administradores do banco
 model Usuario {
-  id_usuario    Int      @id @default(autoincrement()) // Chave primária autoincrementada
+  id_usuario    Int      @id @default(autoincrement()) // Chave primária
   nome          String
   email         String   @unique                       // Email único por usuário
   senha         String                                 // Senha armazenada com hash bcrypt
@@ -20,9 +20,9 @@ model Usuario {
   contas        Conta[]                                // Relação: um usuário tem várias contas
 }
 
-// Entidade Conta — representa as contas bancárias dos usuários
+// Entidade Conta, representa as contas bancárias dos usuários
 model Conta {
-  id_conta          Int       @id @default(autoincrement()) // Chave primária autoincrementada
+  id_conta          Int       @id @default(autoincrement()) // Chave primária
   numero_conta      String    @unique                       // Número único da conta
   saldo             Decimal   @default(0)                   // Saldo inicial zerado
   id_usuario        Int                                     // Chave estrangeira do usuário
@@ -32,14 +32,14 @@ model Conta {
   transacoes_destino   Transacao[] @relation("ContaDestino")  // Transações onde é conta de destino
 }
 
-// Entidade Transacao — representa as movimentações financeiras entre as contas
+// Entidade Transacao, representa as movimentações financeiras entre as contas
 model Transacao {
-  id_transacao      Int      @id @default(autoincrement()) // Chave primária autoincrementada
+  id_transacao      Int      @id @default(autoincrement()) // Chave primária
   tipo              String                                 // Tipo: DEPOSITO, SAQUE ou TRANSFERENCIA
   valor             Decimal                               // Valor da transação
   conta_origem_id   Int                                   // Conta que origina a movimentação
-  conta_destino_id  Int?                                  // Conta destino (nulo em saques/depósitos)
-  data_transacao    DateTime @default(now())              // Data da transação automática
+  conta_destino_id  Int?                                  // Conta destino
+  data_transacao    DateTime @default(now())              // Data em que foi feita a transação
   conta_origem      Conta    @relation("ContaOrigem", fields: [conta_origem_id], references: [id_conta])
   conta_destino     Conta?   @relation("ContaDestino", fields: [conta_destino_id], references: [id_conta])
 }
